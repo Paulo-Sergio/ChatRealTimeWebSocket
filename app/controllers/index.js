@@ -1,5 +1,5 @@
 module.exports.home = function (application, req, res) {
-    
-    res.render('index.ejs');
+
+    res.render('index', { validacao: {} });
 
 }
