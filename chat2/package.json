@@ -1,0 +1,29 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paulo-Sergio/ChatRealTimeWebSocket.git"
+  },
+  "author": "Paulo França",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Paulo-Sergio/ChatRealTimeWebSocket/issues"
+  },
+  "homepage": "https://github.com/Paulo-Sergio/ChatRealTimeWebSocket#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "consign": "^0.1.6",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
+    "express-validator": "^3.2.1",
+    "mongodb": "^2.2.30",
+    "socket.io": "^2.0.3"
+  }
+}
