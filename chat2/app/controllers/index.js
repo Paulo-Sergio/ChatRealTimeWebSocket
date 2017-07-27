@@ -22,17 +22,20 @@ module.exports.autenticar = function (application, req, res) {
     var usuarioDAO = new application.app.models.UsuarioDAO(connection);
 
     usuarioDAO.autenticar(dadosForm, function (result) {
-        console.log(result);
+        // console.log(result);
         if (result[0] != undefined) {
             // criando minha variavel de sessão, se encontrou o usuario e senha
             req.session.autorizado = true;
-            req.session.emailUsuario = result[0].email;
+            req.session.usuario = result[0];
         }
 
         if (req.session.autorizado === true) {
-            res.redirect('chat');
+            res.redirect('/chat');
         } else {
-            res.render('index', { validacao: {} });
+            /* simulando estrutura gerada pelo req.validationErrors(),
+            ** para exibir mensagem de que e-mail não foi encontrado no banco de dados */
+            erros = [{ msg: 'E-mail e/ou senha incorreto(s)' }];
+            res.render('index', { validacao: erros });
         }
     });
 }

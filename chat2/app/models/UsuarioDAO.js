@@ -16,6 +16,7 @@ UsuarioDAO.prototype.autenticar = function (usuario, callback) {
         mongoClient.collection("usuarios", function (err, collection) {
             // collection.find({ email: { $eq: usuario.email }, senha: { $eq: usuario.senha } })
             collection.find(usuario).toArray(function (err, result) {
+                // passando o result para o meu callback, que sera tratado no controller
                 callback(result);
             })
             mongoClient.close();

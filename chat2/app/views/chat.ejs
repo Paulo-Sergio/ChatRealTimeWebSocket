@@ -64,6 +64,7 @@
 							<a href="#" id="exibe_participantes">Participantes</a>
 						</li>
 					</ul>
+					<a href="/sair" class="btn btn-default navbar-btn navbar-right">Sair</a>
 				</div>
 			</div>
 		</nav>
@@ -107,7 +108,7 @@
 					<div class="col-md-12">
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
-							<input type="hidden" value="<%= dadosForm.apelido %>" id="apelido">
+							<input type="hidden" value="<%= usuario.apelido %>" id="apelido">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
 							</span>
