@@ -133,6 +133,7 @@
 					'msgParaServidor',
 					{apelido: $('#apelido').val(), mensagem: $('#mensagem').val()}
 				);
+				$('#mensagem').val("");
 			});
 			
 			// escutar msgParaCliente
@@ -145,6 +146,9 @@
 				html += '</div>';
 
 				$('#dialogos').append(html);
+
+				// deixar a tela para mostrar a mensagem mais atualizada
+				window.scrollTo(0, document.body.scrollHeight);
 			});
 		</script>
 	</body>
