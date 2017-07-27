@@ -8,10 +8,8 @@ module.exports.cadastrar = function (application, req, res) {
 
     var dadosForm = req.body;
 
-    req.assert('nome', 'Nome não pode ser vazio').notEmpty();
-    req.assert('email', 'E-mail não pode ser vazio').notEmpty();
+    req.assert('apelido', 'Apelido não pode ser vazio').notEmpty();
     req.assert('email', 'Este e-mail não é válido').isEmail();
-    req.assert('senha', 'Senha não pode ser vazio').notEmpty();
     req.assert('senha', 'A senha deve conter no minimo 6 caracteres').len(6, 100);
 
     var erros = req.validationErrors();
@@ -25,6 +23,6 @@ module.exports.cadastrar = function (application, req, res) {
     var usuarioDAO = new application.app.models.UsuarioDAO(connection);
     usuarioDAO.inserirUsuario(dadosForm);
 
-    res.render('', { validacao: {} });
+    res.redirect('/');
 
 }

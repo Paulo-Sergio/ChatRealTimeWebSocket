@@ -21,10 +21,18 @@ module.exports.autenticar = function (application, req, res) {
     var connection = new application.config.dbConnection();
     var usuarioDAO = new application.app.models.UsuarioDAO(connection);
 
-    usuarioDAO.autenticar(dadosForm, function (data) {
-        console.log(data);
+    usuarioDAO.autenticar(dadosForm, function (result) {
+        console.log(result);
+        if (result[0] != undefined) {
+            // criando minha variavel de sessão, se encontrou o usuario e senha
+            req.session.autorizado = true;
+            req.session.emailUsuario = result[0].email;
+        }
+
+        if (req.session.autorizado === true) {
+            res.redirect('chat');
+        } else {
+            res.render('index', { validacao: {} });
+        }
     });
-
-    res.send('tudo ok para criar a sessao');
-
 }
