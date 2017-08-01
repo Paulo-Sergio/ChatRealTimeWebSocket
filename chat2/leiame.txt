@@ -1,0 +1,15 @@
+Esse é o projeto inicial do chat.
+
+Usuario acessa o endereço, digita um apelido e clica em entrar.
+
+Todos ficam sabendo que esse usuario de determinado apelido entrou.
+
+Entrando na sala que é estilo o bate papo da uol, Uma pessoa entrar na sala geral e conversa com todos conectadas na determinada sala.
+
+-----------------------------------------------
+
+Criando regra para autenticação e cadastro de usuários para usar a aplicação do chat
+
+Usuario deve entrar com email e senha para iniciar sua sessão
+
+Iniciado a sessão pode conversar com outros usuarios normalmentes tambem autenticados no chat
