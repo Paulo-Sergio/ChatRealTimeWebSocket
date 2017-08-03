@@ -19,6 +19,7 @@ app.set('io', io);
 // estamos escutando eventos de connection, evento padrão do socket.io (propria conexao por parametro [socket])
 io.on('connection', function (socket) {
     console.log('Usuario conectou');
+    console.log(socket);
 
     socket.on('disconnect', function () {
         console.log('Usuario desconectou');
@@ -32,8 +33,8 @@ io.on('connection', function (socket) {
 
     // escutando a mensagem que veio lá do cliente
     socket.on('msgParaServidor', function (data) {
-        // emitir de volta para o cliente, passando apelido e mensagem
         console.log("conversa na sala: " + data.room);
+        // emitir de volta para o cliente, passando apelido e mensagem
         // envia para todos da sala, incluindo o remetente tbm
         io.sockets.in(data.room).emit('msgParaCliente',
             { apelido: data.apelido, mensagem: data.mensagem }

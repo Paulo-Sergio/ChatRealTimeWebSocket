@@ -127,8 +127,10 @@
 			// instancia do obj que se conecta com websocket
 			var socket = io('http://localhost:3000');
 
-			var conversation_id = 754687;
-			
+			var conversation_id = 1001;
+			if($('#apelido').val() == 'paulo' || $('#apelido').val() == 'outro'){
+				var conversation_id = 1002;
+			}
 			socket.emit('subscribe', conversation_id);
 
 			// precisamos emitir a para o servidor a mensagem digitada pelo cliente
