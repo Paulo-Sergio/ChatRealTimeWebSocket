@@ -19,7 +19,6 @@ app.set('io', io);
 // estamos escutando eventos de connection, evento padrão do socket.io (propria conexao por parametro [socket])
 io.on('connection', function (socket) {
     console.log('Usuario conectou');
-    console.log(socket);
 
     socket.on('disconnect', function () {
         console.log('Usuario desconectou');
@@ -27,18 +26,20 @@ io.on('connection', function (socket) {
 
     // vou fazer a junção no canal
     socket.on('subscribe', function (room) {
-        console.log('joining room', room);
-        socket.join(room);
+        console.log('joining room', room.room_id + ' apelido: ' + room.apelido);
+        socket.join(room.room_id);
     });
 
     // escutando a mensagem que veio lá do cliente
     socket.on('msgParaServidor', function (data) {
-        console.log("conversa na sala: " + data.room);
+        console.log("conversa na sala: " + data.room_id);
+
         // emitir de volta para o cliente, passando apelido e mensagem
         // envia para todos da sala, incluindo o remetente tbm
-        io.sockets.in(data.room).emit('msgParaCliente',
-            { apelido: data.apelido, mensagem: data.mensagem }
-        );
+        io.sockets.in(data.room_id).emit('msgParaCliente', {
+            apelido: data.apelido,
+            mensagem: data.mensagem
+        });
         // enviar para todos da sala via broadcast, deixa de fora o remetente
         /*socket.broadcast.to(data.room).emit('msgParaCliente',
             { apelido: data.apelido, mensagem: data.mensagem }

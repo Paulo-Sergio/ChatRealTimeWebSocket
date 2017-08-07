@@ -24,6 +24,17 @@ UsuarioDAO.prototype.autenticar = function (usuario, callback) {
     })
 }
 
+UsuarioDAO.prototype.getUsuarios = function (callback) {
+    this._connection.open(function (err, mongoClient) {
+        mongoClient.collection("usuarios", function (err, collection) {
+            collection.find().toArray(function (err, result) {
+                callback(err, result)
+            })
+            mongoClient.close()
+        })
+    })
+}
+
 module.exports = function () {
     return UsuarioDAO;
 }

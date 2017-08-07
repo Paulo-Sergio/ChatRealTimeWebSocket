@@ -30,7 +30,7 @@ module.exports.autenticar = function (application, req, res) {
         }
 
         if (req.session.autorizado === true) {
-            res.redirect('/chat');
+            res.redirect('/usuarios');
         } else {
             /* simulando estrutura gerada pelo req.validationErrors(),
             ** para exibir mensagem de que e-mail não foi encontrado no banco de dados */

@@ -55,23 +55,23 @@
 				<div class="col-md-1"></div>
                 
             </div>
-        </div>
-		
-		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-			<div class="container">
-				<div class="panel-body campo-mensagem">
-					<div class="col-md-12">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
-							<input type="hidden" value="<%= usuario.apelido %>" id="apelido">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
+			
+			<div class="row participantes" id="participantes">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<% if(usuarios.length > 0) { %>
+						<% for(var i = 0; i < usuarios.length; i++) { %>
+							<span class="participante">
+								<img src="images/ico_usuario.png" />
+								<%= usuarios[i].email %> | <%= usuarios[i].apelido %>
 							</span>
-						</div>
-					</div>
+						<% } %>
+					<% } %>
 				</div>
-			</div>
-		</nav>		
+				<div class="col-md-1"></div>
+                
+            </div>
+        </div>	
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		
@@ -79,43 +79,7 @@
 		<script src="/socket.io/socket.io.js"></script>
 
 		<script>
-			// instancia do obj que se conecta com websocket
-			var socket = io('http://localhost:3000');
-
-			var conversation_id = 1001;
-			if($('#apelido').val() == 'paulo' || $('#apelido').val() == 'outro'){
-				var conversation_id = 1002;
-			}
-			socket.emit('subscribe', {
-				room_id: conversation_id, 
-				apelido: $('#apelido').val()
-			});
-
-			// precisamos emitir a para o servidor a mensagem digitada pelo cliente
-			$('#enviar_mensagem').click(function() {
-				socket.emit(
-					'msgParaServidor', {
-						room_id: conversation_id, 
-						apelido: $('#apelido').val(), 
-						mensagem: $('#mensagem').val()
-					});
-				$('#mensagem').val("");
-			});
 			
-			// escutar msgParaCliente
-			socket.on('msgParaCliente', function(data){
-				var html = '';
-
-				html += '<div class="dialogo">';
-					html += '<h4>' + data.apelido + '</h4>';
-					html += '<p>' + data.mensagem + '</p>';
-				html += '</div>';
-
-				$('#dialogos').append(html);
-
-				// deixar a tela para mostrar a mensagem mais atualizada
-				window.scrollTo(0, document.body.scrollHeight);
-			});
 		</script>
 	</body>
 </html>
