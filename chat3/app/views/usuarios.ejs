@@ -66,10 +66,13 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<h2>Salas</h2>
-					<a href="/createRoom" value="Criar nova sala">Criar Sala</a>
-					<div id="nomeSalas">
+					<form action="/createRoom" method="post">
+						Nome da sala: <input type="text" name="room">
+						<button type="submit">Criar Sala</button>
+					</form>
+					<ul id="list-rooms">
 						
-					</div>
+					</ul>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -81,7 +84,11 @@
 		<script src="/socket.io/socket.io.js"></script>
 
 		<script>
-			
+			var socket = io.connect('http://localhost:3000');
+
+			socket.on('new room', function(room) {
+				$('#list-rooms').append('<li><a href="/chat?'+room+'">'+room+'</a></li>');
+			});
 		</script>
 	</body>
 </html>

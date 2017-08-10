@@ -24,19 +24,27 @@ io.on('connection', function (socket) {
         console.log('Usuario desconectou');
     });
 
+    // socket.emit('roows', io.sockets.adapter.rooms);
+
     // vou fazer a junção no canal
-    socket.on('subscribe', function (room) {
-        console.log('joining room', room.room_id + ' apelido: ' + room.apelido);
-        socket.join(room.room_id);
+    socket.on('join', function (data) {
+        console.log('joining room', data.room_name + ' apelido: ' + data.apelido);
+        socket.join(data.room_name);
+
+        socket.broadcast.to(data.room_name).emit('msgParaCliente', {
+            apelido: data.apelido,
+            mensagem: ' acabou de entrar no chat'
+        });
+        socket.broadcast.emit('new room', data.room_name);
     });
 
     // escutando a mensagem que veio lá do cliente
     socket.on('msgParaServidor', function (data) {
-        console.log("conversa na sala: " + data.room_id);
+        console.log("conversa na sala: " + data.room_name);
 
         // emitir de volta para o cliente, passando apelido e mensagem
         // envia para todos da sala, incluindo o remetente tbm
-        io.sockets.in(data.room_id).emit('msgParaCliente', {
+        io.sockets.in(data.room_name).emit('msgParaCliente', {
             apelido: data.apelido,
             mensagem: data.mensagem
         });

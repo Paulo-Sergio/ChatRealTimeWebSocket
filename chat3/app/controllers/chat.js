@@ -7,10 +7,10 @@ module.exports.iniciaChat = function (application, req, res) {
 
     /* emit msgParaCliente (websocket)
             utilizando obj do socket.io dentro do controller */
-    application.get('io').emit(
+    /*application.get('io').emit(
         'msgParaCliente',
         { apelido: req.session.usuario.apelido, mensagem: ' acabou de entrar no chat' }
-    );
+    );*/
 
     res.render('chat', { usuario: req.session.usuario });
     return;

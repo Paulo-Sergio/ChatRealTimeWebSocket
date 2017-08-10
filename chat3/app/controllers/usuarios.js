@@ -10,3 +10,8 @@ module.exports.usuarios = function (application, req, res) {
         res.render('usuarios', { usuarios: result })
     })
 }
+
+module.exports.createRoom = function (application, req, res) {
+    var nameRoom = req.body.room;
+    res.redirect('/chat?idRoom=' + nameRoom);
+}

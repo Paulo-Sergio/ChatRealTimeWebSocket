@@ -82,23 +82,19 @@
 			// instancia do obj que se conecta com websocket
 			var socket = io('http://localhost:3000');
 
-			var conversation_id = 1001;
-			if($('#apelido').val() == 'paulo' || $('#apelido').val() == 'outro'){
-				var conversation_id = 1002;
-			}
-			socket.emit('subscribe', {
-				room_id: conversation_id, 
+			var room_name = window.location.href.split('?')[1];
+			socket.emit('join', {
+				room_name: room_name, 
 				apelido: $('#apelido').val()
 			});
 
 			// precisamos emitir a para o servidor a mensagem digitada pelo cliente
 			$('#enviar_mensagem').click(function() {
-				socket.emit(
-					'msgParaServidor', {
-						room_id: conversation_id, 
-						apelido: $('#apelido').val(), 
-						mensagem: $('#mensagem').val()
-					});
+				socket.emit('msgParaServidor', {
+					room_name: room_name, 
+					apelido: $('#apelido').val(), 
+					mensagem: $('#mensagem').val()
+				});
 				$('#mensagem').val("");
 			});
 			
