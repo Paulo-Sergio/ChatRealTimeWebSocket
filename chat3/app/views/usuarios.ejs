@@ -87,7 +87,8 @@
 			var socket = io.connect('http://localhost:3000');
 
 			socket.on('new room', function(room) {
-				$('#list-rooms').append('<li><a href="/chat?'+room+'">'+room+'</a></li>');
+				$('#list-rooms').append(
+					'<li><a href="/chat?'+room+'">'+room.substring(7)+'</a></li>');
 			});
 		</script>
 	</body>
