@@ -24,7 +24,7 @@ io.on('connection', function (socket) {
         console.log('Usuario desconectou');
     });
 
-    // socket.emit('roows', io.sockets.adapter.rooms);
+    socket.emit('rooms', io.sockets.adapter.rooms);
 
     // vou fazer a junção no canal
     socket.on('join', function (data) {

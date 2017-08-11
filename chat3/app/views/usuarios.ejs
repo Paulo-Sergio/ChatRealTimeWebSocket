@@ -86,6 +86,22 @@
 		<script>
 			var socket = io.connect('http://localhost:3000');
 
+			socket.on('rooms', function(data) {
+				var ks = Object.keys(data);
+
+				console.log(data);
+
+				// Limpa a lista
+				$('#list-rooms').html('');
+
+				for (var i = 1; i < ks.length ; i++) {
+					var roomLink = ks[i];
+					if(roomLink.includes("idRoom")) {
+						$('#list-rooms').append('<li><a href="/chat?'+roomLink+'">'+roomLink.substring(7)+'</a></li>');
+					}
+				}
+			});
+
 			socket.on('new room', function(room) {
 				$('#list-rooms').append(
 					'<li><a href="/chat?'+room+'">'+room.substring(7)+'</a></li>');
