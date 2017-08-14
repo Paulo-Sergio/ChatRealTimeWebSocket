@@ -27,18 +27,18 @@ app.use(expressValidator());
 
 /* configurar o middleware express-session */
 app.use(expressSession({
-    secret: 'cmievoeveiokfvoisjuio', // chave usado para assinar o cookie de sessão
-    resave: false, // true: sessão é regravada no servidor, mesmo não havendo modificação durante o request
-    saveUninitialized: false // true: criar um sessão nova sempre que a mesma for modificada
+  secret: 'cmievoeveiokfvoisjuio', // chave usado para assinar o cookie de sessão
+  resave: false, // true: sessão é regravada no servidor, mesmo não havendo modificação durante o request
+  saveUninitialized: false // true: criar um sessão nova sempre que a mesma for modificada
 }));
 
 /* efetua o autoload das rotas, models e controllers para o obj app */
 consign()
-    .include('app/routes')
-    .then('config/dbConnection.js')
-    .then('app/models')
-    .then('app/controllers')
-    .into(app);
+  .include('app/routes')
+  .then('config/dbConnection.js')
+  .then('app/models')
+  .then('app/controllers')
+  .into(app);
 
 /* exportar o obj app */
 module.exports = app;
